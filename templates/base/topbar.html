@@ -1,0 +1,26 @@
+{% load static %}
+
+<div class="ui labeled icon inverted menu">
+    <a class="{% if '/dashboard/' in request.path %}active{% endif %} item" href="{% url 'dashboard' %}">
+        <i class="home icon"></i>
+        Inicio
+    </a>
+    <a class="{% if '/cart/' in request.path %}active{% endif %} item" href="{% url 'cart' %}">
+        <i class="shopping cart icon"></i>
+        Mi Carrito
+    </a>
+    <a class="{% if '/purchases/' in request.path %}active{% endif %} item" href="{% url 'purchases' %}">
+        <i class="shopping bag icon"></i>
+        Mis compras
+    </a>
+    <div class="right menu">
+        <a class="{% if '/profile/' in request.path %}active{% endif %} item" href="{% url 'profile' %}">
+            <img class="ui tiny circular centered image" style="width:32px;height:auto;" src="{{ user.image.url }}">
+            {{ user.first_name }} {{user.last_name}}
+        </a>
+        <a class="item" onclick="javascript:confirmarCierreSesion();">
+            <i class="sign-out icon"></i>
+            Cerrar Sesión
+        </a>
+    </div>
+</div>

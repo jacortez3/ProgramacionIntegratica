@@ -1,0 +1,155 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block tittle %}Gualmar - Pagos.{% endblock %}
+
+{% block body %}
+
+{% include "base/topbar.html" %}
+
+<div class="ui centered grid" style="margin-top:60px;margin-bottom:40px;">
+    <div class="ui centered card" style="width:50%;background-color:#cbbede;">
+        <h4 class="ui horizontal divider header" style="margin-top:1em;">
+            <i class="credit card icon"></i>
+            Tarjeta de crédito
+        </h4>
+        <div class="one column row">
+        <form method="POST" id="formulario_pago">
+        {% csrf_token %}
+            <div class="ui content">
+                <div class="justify aligned description">
+                    <p><b>Pago seguro:</b> Confirme los productos y el monto total a pagar antes de realizar la
+                        compra. </p><br>
+                    <div class="ui two column grid">
+                        <div class="row">
+                            <div class="column">
+                                <label><b><i class="credit card outline icon"></i>Tipo de Tarjeta:</b></label>
+                            </div>
+                            <div class="column">
+                                <div class="ui form ">
+                                    <div class="inline fields">
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <input name="frequency" checked="checked" type="radio">
+                                                <label><i class="cc visa icon big"></i></label>
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="ui radio checkbox">
+                                                <input name="frequency" type="radio">
+                                                <label><i class="cc mastercard icon big"></i></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <label><b><i class="calendar alternate icon"></i>Fecha de vencimiento:</b></label>
+                        </div>
+                        <div class="column" style="width:200px">
+                            <select class="ui left floated fluid dropdown">
+                                <option value="1">Enero</option>
+                                <option value="2">Febrero</option>
+                                <option value="3">Marzo</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Mayo</option>
+                                <option value="6">Junio</option>
+                                <option value="7">Julio</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </div>
+                        <div class="column" style="width:140px;margin-left:-2em;">
+                            <select class="ui right floated fluid dropdown">
+                                <option value="1">19</option>
+                                <option value="2">20</option>
+                                <option value="3">21</option>
+                                <option value="4">22</option>
+                                <option value="5">23</option>
+                                <option value="6">24</option>
+                                <option value="7">25</option>
+                                <option value="8">26</option>
+                                <option value="9">27</option>
+                                <option value="10">28</option>
+                            </select>
+                        </div>
+                        <div class="column">
+                            <label><b><i class="credit card icon"></i>Número de tarjeta:</b></label>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid input" style="margin-right:50px;">
+                                <input placeholder="Nro de tarjeta..." type="number"  required>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <label><b><i class="key icon"></i>Codigo de seguridad (CVV):</b></label>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid input" style="margin-right:150px">
+                                <input placeholder="Código de seguridad..." type="number" required>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <label><b><i class="pencil alternate icon"></i>Nombre impreso en la tarjeta:</b></label>
+                        </div>
+                        <div class="column">
+                            <div class="ui fluid input" style="margin-right:100px">
+                                <input placeholder="Código de seguridad..." type="text" required>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <label><b><i class="user icon"></i>Cédula o Rif:</b></label>
+                        </div>
+                        <div class="column" style="width:90px">
+                            <select class="ui left floated fluid dropdown">
+                                <option value="1">V</option>
+                                <option value="2">J</option>
+                                <option value="3">E</option>
+                            </select>
+                        </div>
+                        <div class="column" style="width:220px">
+                            <div class="ui fluid input" style="margin-left:-30px;">
+                                <input placeholder="Cédula o rif..." type="numbe" required>
+                            </div>
+                        </div>
+                        <div class="column">
+                            <label><b><i class="phone icon"></i>Teléfono del Tarjetahabiente:</b></label>
+                        </div>
+                        <div class="column">
+                            <div class="ui input" style="margin-right:170px">
+                                <input placeholder="Teléfono..." type="number" required>
+                            </div>
+                        </div>
+                        <div class="column" style="width:150px">
+                            <a href="{% url 'cart' %}" class="ui red fluid small button" style="margin-left:50px" ><i class="ui icon arrow alternate circle left"></i>Cancelar</a>
+                        </div>
+                        <div class="column" style="width:150px">
+                            <button class="ui green fluid small button" style="margin-left:370px;" type="submit"><i class="ui icon handshake outline"></i>Pagar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        <h4 class="ui horizontal divider header">
+            <i class="paypal icon"></i>
+            Paypal
+        </h4>
+        <p>¡Realiza un pago rápido y seguro con Paypal!</p><br>
+        <div class="ui one column centered grid">
+            <div class="one column row">
+                <div class="ui contentrelaxed">
+                    <a class="ui blue big button" style="margin-bottom:2em;" onclick="javascript:Pagar('pp');"><i class="paypal icon"></i>Paga aquí con Paypal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "base/base.html" %}
+
+{% load static %}
+
+{% block tittle %}Gualmar - Tus compras inteligentes.{% endblock %}
+
+{% block head %}
+
+<style type="text/css">
+  body>.grid {
+    height: 100%;
+  }
+
+  .image {
+    margin-top: -100px;
+  }
+
+  .column {
+    max-width: 450px;
+  }
+</style>
+
+{% endblock %}
+
+{% block body %}
+
+<div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui image header">
+        <img src="{% static 'semantic/images/gualmar_logo.png' %}" class="image" style="width:100%;height:auto;">
+        <div class="content">
+          Gualmar - Tus compras inteligentes.
+        </div>
+      </h2>
+      <form class="ui large form" id="sign_in" method="POST">
+        {% csrf_token %}
+        <div class="ui large segment" style="background-color:#cbbede;">
+        <p>¡Inicia sesión para hacer tus compras!</p>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="username" id="login_username" placeholder="Nombre de usuario:" required
+                autofocus>
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" placeholder="Constraseña:" required>
+            </div>
+            {% if form.errors %}
+            <h5 style="color:red;">Datos incorrectos</h5>
+            {% endif %}
+          </div>
+          <button class="ui fluid large teal submit button" type="submit">Iniciar sesión</button>
+        </div>
+
+      </form>
+
+      <div class="ui message" style="background-color:#cbbede;">
+        ¿Nunca has comprado? <a href=" {% url 'signup' %} "><b>Regístrate</b></a>
+      </div>
+    </div>
+  
+</div>
+
+{% endblock %}
+
+{% block js %}
+{% if messages %}
+{% for m in messages %}
+{% if m.message == "e" %}
+<script>
+   swal.Fire("Creado", "El usuario ha sido creado con éxito.", "success");
+</script>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endblock %}
